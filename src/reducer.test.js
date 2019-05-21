@@ -1,6 +1,6 @@
+import R from 'ramda';
 import reducer from './reducer';
 import * as actions from './actions';
-import R from 'ramda';
 
 const state = {
 	page: 0,
@@ -11,7 +11,9 @@ const state = {
 
 describe('reducer', () => {
 	test('first page', () => {
-		expect(reducer({...state, page: 2}, actions.firstPage())).toEqual(state);
+		expect(reducer({...state, page: 2}, actions.firstPage())).toEqual(
+			state,
+		);
 	});
 
 	test('last page', () => {

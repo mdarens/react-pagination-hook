@@ -11,7 +11,8 @@
 	"scripts": {
 		"test": "jest",
 		"release": "standard-version",
-		"prepack": "babel ./src/*.js -d ./dist"
+		"prepack": "babel ./src/*.js -d ./dist",
+		"lint": "xo"
 	},
 	"license": "MIT",
 	"dependencies": {
@@ -40,5 +41,22 @@
 	},
 	"peerDependencies": {
 		"react": "^16.8.6"
+	},
+	"xo": {
+		"prettier": true,
+		"extends": [
+			"xo-react"
+		],
+		"envs": [
+			"jest",
+			"browser"
+		],
+		"rules": {
+			"camelcase": 1
+		},
+		"ignores": [
+			"docs/*",
+			"fixtures/*"
+		]
 	}
 }

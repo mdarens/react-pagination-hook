@@ -3,8 +3,7 @@
 > Create paginated content with this easy to use React Hook
 
 [![NPM version](https://img.shields.io/npm/v/@mariosant/react-pagination-hook.svg)](https://www.npmjs.com/package/@mariosant/react-pagination-hook)
-[![Build Status](https://travis-ci.org/mariosant/react-pagination-hook.svg?branch=master)](https://travis-ci.org/mariosant/react-pagination-hook)
-
+[![CircleCI](https://circleci.com/gh/mariosant/react-pagination-hook/tree/master.svg?style=svg)](https://circleci.com/gh/mariosant/react-pagination-hook/tree/master)
 
 ![gif](https://i.imgur.com/WFz6eg4.gif)
 

@@ -1,6 +1,8 @@
 # Pagination Hook for React
 
-> Create paginated content with this easy to use React Hook
+Create paginated content with this easy to use React Hook
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M4M7W45W)
 
 [![NPM version](https://img.shields.io/npm/v/@mariosant/react-pagination-hook.svg)](https://www.npmjs.com/package/@mariosant/react-pagination-hook)
 [![CircleCI](https://circleci.com/gh/mariosant/react-pagination-hook/tree/master.svg?style=svg)](https://circleci.com/gh/mariosant/react-pagination-hook/tree/master)

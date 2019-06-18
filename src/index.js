@@ -4,6 +4,7 @@ import {
 	lastPage,
 	nextPage,
 	previousPage,
+	gotoPage,
 	setPerPage,
 	setData,
 } from './actions';
@@ -28,6 +29,7 @@ const usePagination = (data = [], opts) => {
 		lastPage: () => dispatch(lastPage()),
 		nextPage: () => dispatch(nextPage()),
 		previousPage: () => dispatch(previousPage()),
+		gotoPage: v => dispatch(gotoPage(v)),
 		setPerPage: v => dispatch(setPerPage(v)),
 		setData: v => dispatch(setData(v)),
 		totalPages: Math.ceil(data.length / state.perPage),

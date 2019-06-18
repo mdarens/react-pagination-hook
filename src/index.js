@@ -27,35 +27,33 @@ const usePagination = (data = [], opts) => {
 	return {
 		firstPage: useCallback(() => {
 			dispatch(firstPage());
-		}, [dispatch, firstPage]),
-		lastPage: () =>
-			useCallback(() => {
-				dispatch(lastPage());
-			}, [dispatch, lastPage]),
-		nextPage: () =>
-			useCallback(() => {
-				dispatch(nextPage());
-			}, [dispatch, nextPage]),
+		}, [dispatch]),
+		lastPage: useCallback(() => {
+			dispatch(lastPage());
+		}, []),
+		nextPage: useCallback(() => {
+			dispatch(nextPage());
+		}, []),
 		previousPage: useCallback(() => {
 			dispatch(previousPage());
-		}, [dispatch, previousPage]),
+		}, [dispatch]),
 		gotoPage: useCallback(
 			v => {
 				dispatch(gotoPage(v));
 			},
-			[dispatch, gotoPage],
+			[dispatch],
 		),
 		setPerPage: useCallback(
 			v => {
 				dispatch(setPerPage(v));
 			},
-			[dispatch, setPerPage],
+			[dispatch],
 		),
 		setData: useCallback(
 			v => {
 				dispatch(setData(v));
 			},
-			[dispatch, setData],
+			[dispatch],
 		),
 		totalPages: Math.ceil(data.length / state.perPage),
 		paginated: state.paginated,

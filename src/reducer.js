@@ -68,7 +68,7 @@ const reducer = createReducer(
 			paginated,
 		};
 	}),
-	when('PER_PAGE', (state, {payload: perPage}) => {
+	when('PER_PAGE', (state, { payload: perPage }) => {
 		const {data} = state;
 		const page = Math.min(state.page, getTotalPages(perPage, data));
 		const paginated = extractPage(page, perPage, data);

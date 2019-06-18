@@ -1,4 +1,4 @@
-import {useReducer} from 'react';
+import {useCallback, useReducer} from 'react';
 import {
 	firstPage,
 	lastPage,
@@ -6,7 +6,7 @@ import {
 	previousPage,
 	gotoPage,
 	setPerPage,
-	setData
+	setData,
 } from './actions';
 import reducer from './reducer';
 import {extractPage} from './helpers';
@@ -25,13 +25,38 @@ const usePagination = (data = [], opts) => {
 	});
 
 	return {
-		firstPage: () => dispatch(firstPage()),
-		lastPage: () => dispatch(lastPage()),
-		nextPage: () => dispatch(nextPage()),
-		previousPage: () => dispatch(previousPage()),
-		gotoPage: v => dispatch(gotoPage(v)),
-		setPerPage: v => dispatch(setPerPage(v)),
-		setData: v => dispatch(setData(v)),
+		firstPage: useCallback(() => {
+			dispatch(firstPage());
+		}, [dispatch, firstPage]),
+		lastPage: () =>
+			useCallback(() => {
+				dispatch(lastPage());
+			}, [dispatch, lastPage]),
+		nextPage: () =>
+			useCallback(() => {
+				dispatch(nextPage());
+			}, [dispatch, nextPage]),
+		previousPage: useCallback(() => {
+			dispatch(previousPage());
+		}, [dispatch, previousPage]),
+		gotoPage: useCallback(
+			v => {
+				dispatch(gotoPage(v));
+			},
+			[dispatch, gotoPage],
+		),
+		setPerPage: useCallback(
+			v => {
+				dispatch(setPerPage(v));
+			},
+			[dispatch, setPerPage],
+		),
+		setData: useCallback(
+			v => {
+				dispatch(setData(v));
+			},
+			[dispatch, setData],
+		),
 		totalPages: Math.ceil(data.length / state.perPage),
 		paginated: state.paginated,
 		page: state.page + 1,

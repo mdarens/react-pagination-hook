@@ -1,41 +1,54 @@
-import {useReducer} from 'react';
-import {
-	firstPage,
-	lastPage,
-	nextPage,
-	previousPage,
-	gotoPage,
-	setPerPage,
-	setData,
-} from './actions';
-import reducer from './reducer';
-import {extractPage} from './helpers';
+import { useState, useCallback, useMemo } from "react";
 
-const usePagination = (data = [], opts) => {
-	const {perPage, page} = {
-		page: 0,
-		perPage: 10,
-		...opts,
-	};
-	const [state, dispatch] = useReducer(reducer, {
+const extractPage = (page, perPage, data) => {
+	const from = page * perPage;
+	const to = (page + 1) * perPage;
+
+	return data.slice(from, to);
+};
+
+const usePagination = (data, perPage = 10) => {
+	// TODO: don't store current page in state and instead take it as prop to come from route
+	const [currentPage, setCurrentPage] = useState(0);
+
+	const totalPages = Math.ceil(data.length / perPage);
+
+	const firstPage = useCallback(() => {
+		setCurrentPage(0);
+	}, []);
+
+	const lastPage = useCallback(() => {
+		setCurrentPage(totalPages - 1);
+	}, [totalPages]);
+
+	const nextPage = useCallback(() => {
+		setCurrentPage(p => p + 1);
+	}, []);
+
+	const previousPage = useCallback(() => {
+		setCurrentPage(p => p - 1);
+	}, []);
+
+	const gotoPage = useCallback(v => {
+		setCurrentPage(v);
+	}, []);
+
+	const paginated = useMemo(() => extractPage(currentPage, perPage, data), [
+		currentPage,
 		data,
-		page,
-		perPage,
-		paginated: extractPage(page, perPage, data),
-	});
+		perPage
+	]);
 
 	return {
-		firstPage: () => dispatch(firstPage()),
-		lastPage: () => dispatch(lastPage()),
-		nextPage: () => dispatch(nextPage()),
-		previousPage: () => dispatch(previousPage()),
-		gotoPage: v => dispatch(gotoPage(v)),
-		setPerPage: v => dispatch(setPerPage(v)),
-		setData: v => dispatch(setData(v)),
-		totalPages: Math.ceil(data.length / state.perPage),
-		paginated: state.paginated,
-		page: state.page + 1,
-		perPage: state.perPage,
+		firstPage,
+		lastPage,
+		nextPage,
+		previousPage,
+		gotoPage,
+		totalPages,
+		paginated,
+		page: currentPage + 1,
+		perPage
 	};
 };
 
